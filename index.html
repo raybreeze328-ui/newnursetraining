@@ -1,359 +1,398 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
+    <!-- 確保網頁在手機上能正確縮放，這是響應式設計的關鍵 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025年11月新進護理人員訓練課程表</title>
+    <title>2025年11月護理新進人員訓練課程表</title>
+    <!-- 載入 Tailwind CSS 框架，用於快速美化和響應式設計 -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif; margin: 0; padding: 20px; background-color: #f4f7f9; color: #333; }
-        .schedule-container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1 { color: #007bff; text-align: center; border-bottom: 3px solid #007bff; padding-bottom: 15px; margin-bottom: 25px; font-size: 28px; }
-        h2 { color: #dc3545; text-align: center; font-size: 18px; margin-bottom: 10px;}
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: auto; }
-        th, td { border: 1px solid #ddd; padding: 12px 10px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.5; }
-        th { background-color: #007bff; color: white; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
-        tr:nth-child(even) { background-color: #f9fbfd; }
-        tr:hover { background-color: #eaf3fe; }
-        
-        .date-cell { 
-            font-weight: bold; 
-            background-color: #d1ecf1; 
-            color: #0c5460; 
-            text-align: center;
-            width: 8%;
+        /* 設定字體為 Inter，並為中文設計加入通用無襯線字體 */
+        :root {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
-        .topic-cell a { 
-            color: #17a2b8; /* 連結顏色，與一般文字區隔 */
-            font-weight: bold;
-            text-decoration: none; /* 移除下劃線 */
+        /* 自定義表格樣式，提升可讀性 */
+        .schedule-table th, .schedule-table td {
+            /* 響應式 padding: 在小螢幕上使用 1rem，在大螢幕上可能會更舒服 */
+            padding: 1rem;
+            border-bottom: 1px solid #fbd38d; /* 使用暖橘色系邊框 */
+            text-align: left; /* 確保所有單元格內容靠左對齊 */
         }
-        .topic-cell a:hover {
-            text-decoration: underline;
+        .schedule-table thead th {
+            border-bottom: 3px solid #dd6b20; /* 使用更深的橘色作為表頭底線 */
+            color: #9c4221; /* 表頭文字顏色 */
         }
-        .topic-cell span.note-text {
-            display: block;
-            font-size: 0.85em;
-            color: #888;
-            margin-top: 5px;
+
+        /* 粉紅橘溫暖配色方案 */
+        .bg-warm-peach {
+            background-color: #ffe8d6; /* 淺暖橘背景 */
         }
-        
-        .objective-cell { font-size: 13px; color: #555; width: 28%; }
-        .time-cell { width: 10%; text-align: center; }
-        .speaker-cell { width: 15%; }
-        .location-cell { width: 12%; text-align: center; }
-        
-        .note { 
-            margin-top: 30px; 
-            padding: 15px; 
-            border-left: 5px solid #ffc107; 
-            background-color: #fffbe6; 
-            border-radius: 4px;
-            font-size: 14px;
+        .text-deep-orange {
+            color: #9c4221; /* 深橘棕色文字 */
         }
-        .note strong { color: #856404; }
+        .bg-header-light {
+            background-color: #fff0d9; /* 淺橘色表頭背景 */
+        }
+        .btn-warm {
+            background-color: #f6ad55; /* 暖橘色按鈕 */
+            color: white;
+        }
+        .btn-warm:hover {
+            background-color: #ed8936; /* 暖橘色按鈕 hover */
+        }
     </style>
 </head>
-<body>
-    <div class="schedule-container">
-        <h1>2025年11月新進護理人員訓練課程表</h1>
-        <h2>訓練期間：11月03日 至 11月10日</h2>
+<body class="bg-warm-peach p-4 sm:p-8">
 
-        <div class="note">
-            <strong>【重要提醒 - 講義下載】</strong>
-            <p>下方課程主題帶有**藍綠色粗體文字**即表示有講義可供下載。請將程式碼中的 `` 替換為實際的檔案連結，參加者即可點擊下載。</p>
+    <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-xl p-4 sm:p-8">
+        <!-- 標題區塊 -->
+        <header class="mb-8 border-b border-orange-200 pb-4">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-deep-orange text-center tracking-tight">2025年11月新進人員訓練課程表</h1>
+            <p class="text-center text-gray-500 mt-2 text-lg">New Staff Training Schedule (November 2025)</p>
+        </header>
+
+        <!-- 課程表主體：使用 overflow-x-auto 讓寬表格在手機上可以橫向捲動 -->
+        <div class="overflow-x-auto">
+            <table class="schedule-table min-w-full divide-y divide-orange-200 border border-orange-200 rounded-lg">
+                <thead class="bg-header-light">
+                    <tr>
+                        <th scope="col" class="px-3 py-3 text-sm font-bold uppercase tracking-wider w-1/12 rounded-tl-lg">日期</th>
+                        <th scope="col" class="px-3 py-3 text-sm font-bold uppercase tracking-wider w-1/6">時間</th>
+                        <th scope="col" class="px-3 py-3 text-sm font-bold uppercase tracking-wider w-5/12">主題</th>
+                        <th scope="col" class="px-3 py-3 text-sm font-bold uppercase tracking-wider w-1/6">主講者</th>
+                        <th scope="col" class="px-3 py-3 text-sm font-bold uppercase tracking-wider w-1/6 rounded-tr-lg">地點</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-orange-100">
+                    <!-- 11/3 課程 -->
+                    <tr>
+                        <td rowspan="4" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50">11/3</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:00~13:20</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">致詞</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">馬淑清部長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:20~13:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">新人訓練注意事項說明</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">邱旅揚 教學護理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">14:00~14:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">溝通應對、覺察情緒</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">胡淑萍小組長<br>莊佩華小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">15:00~16:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">急救訓練</span>
+                                <a href="https://drive.google.com/file/d/1FBesOmz9OwjplSRdw8U1gsliJU7l2RD7/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">盧葦芝護理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+
+                    <!-- 11/4 課程 -->
+                    <tr>
+                        <td rowspan="4" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50">11/4</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">(A)08:00~10:50<br>(B)13:00-15:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">病人安全照護(1) 病人辨識(2) 輸血安全(3) 預防跌倒、防跌與行動輔助(4) 醫護病交班重點與原則</span>
+                                <a href="https://drive.google.com/file/d/1jfzLUs76HOdWcpxub7NbPiwCkJ-TGLmx/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">劉思汝副護理長<br>周珊珊護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">(A)11:00~11:50<br>(B)16:00-16:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">常見檢查(或檢驗)作業流程：檢體收集（血液、尿液、糞便）及輸送作業之安全及注意事項</span>
+                                <a href="https://drive.google.com/file/d/1dcpVnUYBYC_S8TkX8FYrZPNuqUXRIbvv/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">陳怡伶小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">563會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">(B)08:00-09:50<br>(A)13:00-14:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">醫院資訊與資通安全</span>
+                                <a href="https://drive.google.com/file/d/1NHKYcqNE4oxwF38UIMEyCZmWqxGvq2wg/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">馮惠雅小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">電腦教室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">(B)10:00-11:50<br>(A)15:00~16:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">護理紀錄書寫及常用表單介紹(含護囑系統與A+巡房)</span>
+                                <a href="https://drive.google.com/file/d/1jfy5QbQBEowEFpNFm9UsHmmCfP8vaLMr/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">邱昱瑄小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">電腦教室</td>
+                    </tr>
+
+                    <!-- 11/5 課程 -->
+                    <tr>
+                        <td rowspan="4" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50">11/5</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">08:00~10:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">基礎護理技術操作(1)生命徵象測量(2)翻身擺位(含更換尿布)(3)約束帶使用(4)穿脫病人服(5)便盆椅、輪椅(6)拐杖、助行器(7)基本身體清潔</span>
+                                <a href="https://drive.google.com/file/d/1xEu5kyufM9llEQyLIpa2LMqKwCO_tB7_/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">蔡佩云小組長<br>黃郁雯小組長<br>魏晶婷副護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">11:00~11:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">尖銳物品扎傷事件防範</span>
+                                <a href="https://drive.google.com/file/d/14LtqQ-afKgCKFXQ4s54O2oCxQFGZmcJa/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">邱旅揚教學護理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:00~14:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">抽痰技術 (註)</span>
+                                <a href="https://drive.google.com/file/d/12kcA7HNZjpS5g52rsHdtoHV1JK9YuQLT/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">陶菁護理長<br>林姿妤小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">15:00~16:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <!-- 包含兩個課程的講義，特別處理 -->
+                            <span class="font-semibold text-gray-700">非侵入性氧療法、胸腔物理療法 (註)</span>
+                            <div class="flex flex-col space-y-2 mt-2 w-full sm:max-w-xs">
+                                <a href="https://drive.google.com/file/d/1hm18uAsXFruAbn8f9Zv4tTCgSBqzjsH0/view?usp=sharing" target="_blank" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-red-400 hover:bg-red-500 transition duration-150 ease-in-out">
+                                    非侵入性氧療 [講義下載]
+                                </a>
+                                <a href="https://drive.google.com/file/d/1tDN2Zl6GZs6E1ABP_qRTDfcu75LRKSWs/view?usp=sharing" target="_blank" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-red-400 hover:bg-red-500 transition duration-150 ease-in-out">
+                                    胸腔叩擊及姿位引流 [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">陶菁護理長<br>林姿妤小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+
+                    <!-- 11/6 課程 -->
+                    <tr>
+                        <td rowspan="5" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50">11/6</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">08:00~08:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">感染控制：因應特殊新興傳染病（如COVID-19）相關之隔離措施及防護標準（含標準、空氣、飛沫、接觸防護措施），穿脫個人防護裝備示教與回覆示教、TOCC[課前請先觀看影音平台...]</span>
+                                <a href="https://drive.google.com/file/d/1nBIMYhtM1L5noPYvNnv7Ea6UozDsOSIC/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">謝淑玲護理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">09:00~11:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">用藥安全 (註)</span>
+                                <a href="https://drive.google.com/file/d/1UphAcKdshNreGJJEH_tRzduar8bYk76Q/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">許雯婷小組長<br>楊惠晶小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:00~14:20</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">鼻胃管灌食與護理</span>
+                                <a href="https://drive.google.com/file/d/1MY_ybvxQW4C2vSz1abzKKqQHg_VR4hkT/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">林懿弘小組長<br>謝雅玲護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">14:30~15:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">灌腸技術(含甘油球小量灌腸、清潔灌腸) (註)</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">林懿弘小組長<br>謝雅玲護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">16:00~16:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">一般傷口照護 (註)</span>
+                                <a href="https://drive.google.com/file/d/1euFSYt916AeAtGfJTdENnE6fzRyD6gD5/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">林懿弘小組長<br>謝雅玲護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+
+                    <!-- 11/7 課程 -->
+                    <tr>
+                        <td rowspan="5" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50">11/7</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">08:00~09:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">靜脈輸液注射練習 (註)</span>
+                                <a href="https://drive.google.com/file/d/1u3VWbkpOGVX_RYR8Qn8shVTQKbN_GrWX/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">蘇致穎小組長<br>曾莉淳小組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">10:00~11:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">引流管護理(pigtail、CWV、H/V) (註)</span>
+                                <a href="https://drive.google.com/file/d/1PKiUfhje1xLKaOaOZxNKazW-fjRTz3rQ/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">嚴逸屏護理師<br>魏妙芬副護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:00~13:30</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">意識狀態及肌肉力量評估技術 (註)</span>
+                                <a href="https://drive.google.com/file/d/1pT4Ry5l4sX359knwvH0H6la25Bn4ufYv/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">嚴逸屏護理師<br>魏妙芬副護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">13:40~15:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">協助導尿管置放與護理術(含女性單次導尿、存留導尿、尿管護理) (註)</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">嚴逸屏護理師<br>魏妙芬副護理長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">16:00~17:00</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">圖書館資源介紹</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">圖書館陳憶玲組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">臨床技能中心</td>
+                    </tr>
+                    
+                    <!-- 11/10 課程 -->
+                    <tr>
+                        <td rowspan="3" class="px-3 py-4 whitespace-nowrap text-sm font-bold text-deep-orange bg-orange-50/50 rounded-bl-lg">11/10</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">08:00~09:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">職業安全衛生教育訓練(含消防安全)</span>
+                                <a href="https://drive.google.com/file/d/1qoMSLYdduT3T8-YgGtpE-1u0DGQhRpHi/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">馮家綺安全衛生管理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">553會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">10:00~10:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <div class="flex flex-col items-start space-y-2">
+                                <span class="font-semibold text-gray-700">本院人事規章與相關福利介紹</span>
+                                <a href="https://drive.google.com/file/d/18GxXgxWIGYOnsjsgedwtTEw5Ce1LX8nj/view?usp=sharing" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm btn-warm hover:shadow-md transition duration-150 ease-in-out">
+                                    [講義下載]
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">許爾珊組長</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">553會議室</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900">11:00-11:50</td>
+                        <td class="px-3 py-4 text-sm text-gray-900">
+                            <span class="font-semibold text-gray-700">結訓考&課程檢討及意見回饋</span>
+                        </td>
+                        <td class="px-3 py-4 text-sm text-gray-900">邱旅揚教學護理師</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 rounded-br-lg">553會議室</td>
+                    </tr>
+                    
+                    <!-- 註解說明 -->
+                    <tr class="bg-red-50/50">
+                        <td colspan="5" class="px-3 py-4 text-xs italic text-gray-700 rounded-b-lg">
+                            **課程備註：** (註) 表示請課前完成Eportfolio影片觀看與線上測驗。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>日期</th>
-                    <th>時間</th>
-                    <th>主題 (點擊下載講義)</th>
-                    <th>課程目標</th>
-                    <th>主講者</th>
-                    <th>地點</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="4" class="date-cell">11/03</td>
-                    <td class="time-cell">13:00~13:20</td>
-                    <td class="topic-cell">致詞</td>
-                    <td class="objective-cell"></td>
-                    <td class="speaker-cell">馬淑清部長 (ND-53001)</td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">13:20~13:50</td>
-                    <td class="topic-cell">致詞/新人訓練注意事項說明</td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>訓練計畫注意事項</li>
-                            <li>上課地點環境介紹</li>
-                            <li>影音平台與Eportfolio系統介紹</li>
-                            <li>完訓作業繳交說明</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">邱旅揚教學護理師 (ND-53036)</td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">14:00~14:50</td>
-                    <td class="topic-cell">溝通應對、覺察情緒</td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>提升新進人員臨床應對技巧。</li>
-                            <li>增加新進人員面對衝突事件解決的自信心。</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">
-                        胡淑萍小組長 (OPD-53266)<br>
-                        莊佩華小組長 (7B-55792)
-                    </td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">15:00~16:50</td>
-                    <td class="topic-cell">
-                        <a href="" target="_blank">急救訓練</a>
-                        <span class="note-text">(含BLS、AED操作、CPCR角色職責)</span>
-                    </td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>了解執行BLS及操作AED儀器之時機及注意事項</li>
-                            <li>能了解成組CPCR角色職責並執行角色任務</li>
-                            <li>能正確執行BLS流程及操作AED儀器</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">盧葦芝護理師 (ER-57185)</td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
 
-                <tr>
-                    <td rowspan="4" class="date-cell">11/04</td>
-                    <td class="time-cell">
-                        (A)08:00~10:50<br>
-                        (B)13:00~15:50
-                    </td>
-                    <td class="topic-cell">
-                        <a href="" target="_blank">病人安全照護</a>
-                        <span class="note-text">(病人辨識、輸血安全、預防跌倒、醫護病交班)</span>
-                    </td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>了解病人安全之定義及目標</li>
-                            <li>了解病人辨識、輸血安全、病患跌倒與跌倒預防改善措施、交接班的重要性及目的與ISBAR溝通時機與模式</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">
-                        劉思汝副護理長 (7A-55701)<br>
-                        周珊珊護理長 (12B-55291)
-                    </td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">
-                        (A)11:00~11:50<br>
-                        (B)16:00~16:50
-                    </td>
-                    <td class="topic-cell">
-                        <a href="" target="_blank">常見檢查(或檢驗)作業流程</a>
-                        <span class="note-text">(檢體收集（血液、尿液、糞便）及輸送作業)</span>
-                    </td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>瞭解檢體之收集作業內容及項目</li>
-                            <li>瞭解收集之安全及注意事項</li>
-                            <li>瞭解檢體收集流程及運送流程（Barcode reader）</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">陳怡伶小組長 (10A-55101)</td>
-                    <td class="location-cell">563會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">
-                        (B)08:00~09:50<br>
-                        (A)13:00~14:50
-                    </td>
-                    <td class="topic-cell">
-                        <a href="" target="_blank">醫院資訊與資通安全</a>
-                        <span class="note-text">(含護囑系統、KM等操作)</span>
-                    </td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>了解系統主程式各項作業系統及其操作方式</li>
-                            <li>了解現行護囑作業系統相關畫面及操作方式</li>
-                            <li>了解院內網頁、KM之功能</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">馮惠雅小組長 (12A-55211)</td>
-                    <td class="location-cell">電腦教室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">
-                        (B)10:00~11:50<br>
-                        (A)15:00~16:50
-                    </td>
-                    <td class="topic-cell">
-                        <a href="" target="_blank">護理紀錄書寫及常用表單介紹</a>
-                        <span class="note-text">(含護囑系統與A+巡房)</span>
-                    </td>
-                    <td class="objective-cell">
-                        <ol>
-                            <li>能清楚護理紀錄書寫方式及常用表單種類</li>
-                            <li>能使用及運用護囑系統執行護理過程五大步驟</li>
-                        </ol>
-                    </td>
-                    <td class="speaker-cell">邱昱瑄小組長 (4BI-57470)</td>
-                    <td class="location-cell">電腦教室</td>
-                </tr>
-                
-                <tr>
-                    <td rowspan="4" class="date-cell">11/05</td>
-                    <td class="time-cell">08:00~10:50</td>
-                    <td class="topic-cell">基礎護理技術操作 (生命徵象、翻身擺位、約束帶等)</td>
-                    <td class="objective-cell">能正確執行並熟悉各項基礎護理技術之操作技巧。</td>
-                    <td class="speaker-cell">蔡佩云、黃郁雯、魏晶婷</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">11:00~11:50</td>
-                    <td class="topic-cell">預防針扎與安全針具教學</td>
-                    <td class="objective-cell">認識扎傷定義、常見原因與預防策略，並進行安全針具教學與回覆示教。</td>
-                    <td class="speaker-cell">邱旅揚教學護理師 (ND-53036)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">13:00~14:50</td>
-                    <td class="topic-cell">抽痰技術(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行抽痰技術的技巧及注意事項。</td>
-                    <td class="speaker-cell">陶菁護理長 (4AI-57451)、林姿妤小組長 (BURN-57480)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">15:00~16:50</td>
-                    <td class="topic-cell">非侵入性氧療法、胸腔物理療法(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行非侵入性氧療法、胸腔物理療法的技巧及注意事項。</td>
-                    <td class="speaker-cell"></td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="5" class="date-cell">11/06</td>
-                    <td class="time-cell">08:00~08:50</td>
-                    <td class="topic-cell">
-                        感染控制：因應特殊新興傳染病相關之隔離措施及防護標準...
-                        <span class="note-text">(課前請先觀看影音平台影片)</span>
-                    </td>
-                    <td class="objective-cell">能清楚正確洗手步驟、了解穿脫隔離衣的時機與注意事項，並正確執行。</td>
-                    <td class="speaker-cell">謝淑玲護理師 (6B-55692)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">09:00~11:50</td>
-                    <td class="topic-cell">用藥安全(註)</td>
-                    <td class="objective-cell">了解正確給藥原則、步驟與注意事項，並能正確執行口服給藥標準技術。</td>
-                    <td class="speaker-cell">許雯婷小組長 (5A-55501)、楊惠晶小組長 (RCC-55201)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">13:00~14:20</td>
-                    <td class="topic-cell">
-                        鼻胃管灌食與護理
-                        <span class="note-text">(課前請先觀看Eportfolio影片與完成測驗)</span>
-                    </td>
-                    <td class="objective-cell">能正確準備用物及執行鼻胃管灌食與護理的技巧及注意事項。</td>
-                    <td class="speaker-cell">林懿弘小組長 (PSY-58301)、謝雅玲護理長 (8B-55892)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">14:30~15:50</td>
-                    <td class="topic-cell">灌腸技術(含甘油球小量灌腸、清潔灌腸)(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行灌腸技術的技巧及注意事項。</td>
-                    <td class="speaker-cell"></td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">16:00~16:50</td>
-                    <td class="topic-cell">一般傷口照護(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行傷口照護的技巧及注意事項。</td>
-                    <td class="speaker-cell"></td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="5" class="date-cell">11/07</td>
-                    <td class="time-cell">08:00~09:50</td>
-                    <td class="topic-cell">靜脈輸液注射練習(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行靜脈輸液注射標準技術，並了解皮下注射與驗血糖的注意事項。</td>
-                    <td class="speaker-cell">蘇致穎小組長 (6A-55601)、曾莉淳小組長 (3BI-57351)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">10:00~11:50</td>
-                    <td class="topic-cell">引流管護理(pigtail、CWV、H/V)(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行引流管護理技巧及注意事項。</td>
-                    <td class="speaker-cell">嚴逸屏護理師 (ER-57185)、魏妙芬副護理長 (8C-56892)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">13:00~13:30</td>
-                    <td class="topic-cell">意識狀態及肌肉力量評估技術(註)</td>
-                    <td class="objective-cell">能正確準備用物及執行GCS、MP評估技巧及注意事項。</td>
-                    <td class="speaker-cell"></td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">13:40~15:50</td>
-                    <td class="topic-cell">協助導尿管置放與護理術(含女性單次導尿、存留導尿、尿管護理) (註)</td>
-                    <td class="objective-cell">能正確準備用物及執行協助導尿管置放與護理術的技巧及注意事項。</td>
-                    <td class="speaker-cell"></td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">16:00~17:00</td>
-                    <td class="topic-cell">圖書館資源介紹</td>
-                    <td class="objective-cell">圖書館環境與資料庫介紹。</td>
-                    <td class="speaker-cell">圖書館 陳憶玲組長 (52073)</td>
-                    <td class="location-cell">教學大樓臨床技能中心</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="3" class="date-cell">11/10</td>
-                    <td class="time-cell">08:00~09:50</td>
-                    <td class="topic-cell">職業安全衛生教育訓練(含消防安全)</td>
-                    <td class="objective-cell">認識火災定義、滅火器使用方法、了解職業安全衛生法規與危機應變流程。</td>
-                    <td class="speaker-cell">馮家綺 安全衛生管理師 (安全衛生室-52579)</td>
-                    <td class="location-cell">553會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">10:00~10:50</td>
-                    <td class="topic-cell">本院人事規章與相關福利介紹</td>
-                    <td class="objective-cell">人事規章、勞健保制度、員工福利、排派班原則、薪資考核制度介紹。</td>
-                    <td class="speaker-cell">許爾珊組長 (人資部-52018)</td>
-                    <td class="location-cell">553會議室</td>
-                </tr>
-                <tr>
-                    <td class="time-cell">11:00~11:50</td>
-                    <td class="topic-cell">結訓考&課程檢討及意見回饋</td>
-                    <td class="objective-cell"></td>
-                    <td class="speaker-cell">邱旅揚教學護理師 (ND-53036)</td>
-                    <td class="location-cell">553會議室</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="note">
-            <strong>【講義檔案與對應的主題】</strong>
-            <p>請將上方 HTML 程式碼中的 `` 替換為以下檔案的實際連結：</p>
-            <ul>
-                <li>**急救訓練**：對應檔案 **`01.急救訓練(1110428).pdf`**</li>
-                <li>**病人安全照護**：對應檔案 **`02.病人安全照護(1140630).pdf`**</li>
-                <li>**常見檢查(或檢驗)作業流程**：對應檔案 **`03.常見檢查作業流程檢體收集作業1140915.pdf`**</li>
-                <li>**醫院資訊與資通安全**：對應檔案 **`04.醫院資訊(含護理資訊KM)(1130508).pdf`**</li>
-                <li>**護理紀錄書寫及常用表單介紹**：對應檔案 **`05.護理紀錄書寫(含護囑系統與A+巡房)1140915.pdf`**</li>
-            </ul>
-        </div>
+        <!-- 頁尾提醒 -->
+        <footer class="mt-8 pt-4 border-t border-orange-200 text-center text-sm text-gray-600">
+            <p>請點擊課程主題下方的 <span class="font-medium text-deep-orange">[講義下載]</span> 按鈕，即可開啟Google Drive連結下載課程文件。</p>
+            <p class="mt-2 text-red-500 font-medium">注意：「非侵入性氧療法、胸腔物理療法」提供兩個不同的紅色下載連結，請留意區分。</p>
+        </footer>
     </div>
+
 </body>
 </html>
